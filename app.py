@@ -1,6 +1,17 @@
 import streamlit as st
 import pickle
 import requests
+movies_link = "https://drive.google.com/file/d/1n4tgU_rZqJsGrAuptWo1znmJ78QMWClB/uc?export=download"
+similarity_link = "https://drive.google.com/file/d/12B1D8sSZk_ddDeMdhR_jlVmHuXpmunXP/uc?export=download"
+
+response_movies = requests.get(movies_link)
+response_similarity = requests.get(similarity_link)
+
+with open("models/movies.pkl", "wb") as f:
+    f.write(response_movies.content)
+    
+with open("models/similarity.pkl","wb") as f:
+    f.write(response_similarity.content)
 
 movies = pickle.load(open("models/movies_list.pkl",'rb'))
 similarity = pickle.load(open("models/similarity.pkl",'rb'))
